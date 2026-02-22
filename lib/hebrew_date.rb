@@ -2,8 +2,8 @@
 
 require 'date'
 require 'delegate'
-require_relative 'support/holidays.rb'
-require_relative 'support/parshiot.rb'
+require_relative 'support/holidays'
+require_relative 'support/parshiot'
 
 # This code is essentially a port of Avrom Finkelstein's RegularHebrewDate
 # Java class (http://web.archive.org/web/20061207174551/http://www.bayt.org/calendar/hebdate.html)
