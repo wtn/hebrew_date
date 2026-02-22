@@ -1,23 +1,27 @@
-Gem::Specification.new do |s|
-  s.name         = 'hebrew_date'
-  s.require_paths = %w(. lib)
-  s.version      = '1.1.1'
-  s.date         = '2025-12-10'
-  s.summary      = 'Hebrew/Jewish dates, times, and holidays.'
-  s.description  = <<-EOF
-   hebrew_date is a library designed to provide information about the Jewish
-   calendar. This includes dates, holidays, and parsha of the week.
+# frozen_string_literal: true
 
-EOF
-  s.authors      = ['Daniel Orner']
-  s.email        = 'dmorner@gmail.com'
-  s.files        = `git ls-files`.split($/)
-  s.homepage     = 'https://github.com/dorner/hebrew_date'
-  s.license       = 'MIT'
-  s.required_ruby_version = '>= 3.1.0'
+Gem::Specification.new do |spec|
+  spec.name = 'hebrew_date'
+  spec.version = '1.1.1'
+  spec.date = '2025-12-10'
+  spec.authors = ['Daniel Orner']
+  spec.email = ['dmorner@gmail.com']
 
-  s.add_development_dependency 'yard', '~> 0.9.37'
-  s.add_development_dependency 'rspec', '~> 3.13'
-  s.add_development_dependency 'rake'
+  spec.summary = 'Hebrew/Jewish dates, times, and holidays.'
+  spec.description = <<~EOF
+    hebrew_date is a library designed to provide information about the Jewish
+    calendar. This includes dates, holidays, and parsha of the week.
+  EOF
+  spec.homepage = 'https://github.com/dorner/hebrew_date'
+  spec.license = 'MIT'
+  spec.required_ruby_version = ">= 3.1.0"
 
+  gemspec = File.basename(__FILE__)
+  spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
+    ls.readlines("\x0", chomp: true).reject do |f|
+      (f == gemspec) ||
+        f.start_with?(*%w[doc/ Gemfile .gitignore spec/])
+    end
+  end
+  spec.require_paths = ['lib']
 end

@@ -2,8 +2,8 @@
 
 require 'date'
 require 'delegate'
-require_relative 'support/holidays.rb'
-require_relative 'support/parshiot.rb'
+require_relative 'support/holidays'
+require_relative 'support/parshiot'
 
 # This code is essentially a port of Avrom Finkelstein's RegularHebrewDate
 # Java class (http://web.archive.org/web/20061207174551/http://www.bayt.org/calendar/hebdate.html)
@@ -564,15 +564,15 @@ class HebrewDate < Delegator
     conjunction_parts = 1080 * (hours_elapsed.remainder(24)) +
       parts_elapsed.remainder(1080)
     alternative_day = conjunction_day
-		if (conjunction_parts >= 19440) || # If new moon is at or after midday,
-			(((conjunction_day.remainder(7)) == 2) &&	    # ...or is on a Tuesday...
-				(conjunction_parts >= 9924) &&	# at 9 hours, 204 parts or later...
-				!self.class.hebrew_leap_year?(year)) ||  # ...of a common year,
-			(((conjunction_day.remainder(7)) == 1) &&	 # ...or is on a Monday at...
-				(conjunction_parts >= 16789) && # 15 hours, 589 parts or later...
-				(self.class.hebrew_leap_year?(year - 1))) # at the end of a leap year
-			# Then postpone Rosh HaShanah one day
-			alternative_day += 1
+    if (conjunction_parts >= 19440) || # If new moon is at or after midday,
+       (((conjunction_day.remainder(7)) == 2) &&      # ...or is on a Tuesday...
+         (conjunction_parts >= 9924) &&  # at 9 hours, 204 parts or later...
+         !self.class.hebrew_leap_year?(year)) ||  # ...of a common year,
+       (((conjunction_day.remainder(7)) == 1) &&  # ...or is on a Monday at...
+         (conjunction_parts >= 16789) && # 15 hours, 589 parts or later...
+         (self.class.hebrew_leap_year?(year - 1))) # at the end of a leap year
+      # Then postpone Rosh HaShanah one day
+      alternative_day += 1
     end
 
     # If Rosh Hashana would occur on Sunday, Wednesday, or Friday
@@ -639,8 +639,8 @@ class HebrewDate < Delegator
   # @return [void]
   def _hebrew_date_to_abs_date(year, month, date)
     puts "hebrew_date_to_abs_date #{year} #{month} #{date}" if @debug
-  	if month < 7 # Before Tishri, so add days in prior months
-  		# this year before and after Nisan.
+    if month < 7 # Before Tishri, so add days in prior months
+      # this year before and after Nisan.
       (7..last_month_of_hebrew_year).each do |m|
         date += last_day_of_hebrew_month(m)
       end
