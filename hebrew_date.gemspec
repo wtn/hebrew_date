@@ -2,8 +2,8 @@
 
 Gem::Specification.new do |spec|
   spec.name = 'hebrew_date'
-  spec.version = '1.1.1'
-  spec.date = '2025-12-10'
+  spec.version = '1.1.2'
+  spec.date = '2026-02-22'
   spec.authors = ['Daniel Orner']
   spec.email = ['dmorner@gmail.com']
 
