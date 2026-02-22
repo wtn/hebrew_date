@@ -71,6 +71,7 @@ module HebrewDateSupport
             elsif date.day == 7
               date.set_hebrew_date(year, 2, 3)
             end
+            date
           when :LAG_BAOMER
             self.new_from_hebrew(year, 2, 18)
           when :YOM_YERUSHALAYIM
